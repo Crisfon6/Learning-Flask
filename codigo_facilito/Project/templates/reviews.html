@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    {% for comment in comments.items %}
+    <h3>
+        {{ comment.username}}
+    </h3>
+<p>{{comment.text}}</p>
+<h5>
+    {{ date_format(comment.create_date)}}
+</h5>
+<hr>
+    {% endfor %}
+    {% if comments.has_prev %}
+    <a href="{{ url_for('reviews', page=comments.prev_num)}}">&lt;&lt; Newer posts</a>
+    {% else %}&lt;&lt;no more newer posts{% endif %}
+
+    {% if comments.has_next %}
+    <a href="{{ url_for('reviews', page=comments.next_num)}}"> Older posts >> >> </a>
+    {% else %} No more older posts >> >>{% endif %}
+{% endblock %}
